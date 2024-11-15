@@ -1,45 +1,81 @@
 import { useState } from 'react';
-import { Button, Image, SafeAreaView, StyleSheet, Text, TextInput } from 'react-native';
+import { Button, StyleSheet, Text, TextInput, View } from 'react-native';
+import ProdutoCard from './components/ProdutoCard';
 
 export default function App() {
-  const [nome, setNome] = useState("");
-  const [nomes, setNomes] = useState([]);
+  const [produtos, setProdutos] = useState([]);
+  const [produtoNome, setProdutoNome] = useState('');
+  const [produtoPreco, setProdutoPreco] = useState('');
+  const [produtoLocal, setProdutoLocal] = useState('');
+  const [produtoData, setProdutoData] = useState('');
 
+  const gerarNovoId = _ => {
+    const listaProdutos = [...produtos];
+    const ultimoIndice = listaProdutos.length - 1;
+
+    if (ultimoIndice > 0) {      
+      const ultimoProd = listaProdutos[ultimoIndice];
+      const ultimoId = ultimoProd.id;
+      return ultimoId + 1;     
+    }
+    return 1;
+  }
   return (
-    <SafeAreaView style={styles.container}>
-     <Image style={styles.imagem}
-        source={{
-          uri: "https://reactnative.dev/img/tiny_logo.png"
-        }}        
-      />
-      {nomes.map((nome, i) => <Text key={i}>{nome}</Text>)}
-      <Text>Informe seu nome:</Text>
-      <TextInput placeholder="Nome completo" onChangeText={setNome}/>
-      <Button style={styles.paragraph} title="Enviar" 
-        onPress={() => {
-          const listaNomes = [...nomes];
-          listaNomes.push(nome);
-          setNomes(listaNomes);
-      }}
-      />
-    </SafeAreaView>
+    <View style={styles.container}>
+      <View>
+        <Text>Produtos:</Text>
+        {produtos.map(prod => <ProdutoCard prod={prod} />)}
+      </View>
+      <View>
+        <Text>Formulário de Cadastro:</Text>
+          <TextInput 
+            placeholder="Nome"
+            keyboardType='default'
+            onChangeText={setProdutoNome}
+          />
+          <TextInput 
+            placeholder="Preço"
+            keyboardType='decimal-pad'
+            onChangeText={setProdutoPreco}
+          />
+          <TextInput 
+            placeholder="Local"
+            keyboardType='num-pad'
+            onChangeText={setProdutoLocal}
+          />
+          <TextInput 
+            placeholder="Data"
+            keyboardType='phone-pad'
+            onChangeText={setProdutoData}
+          />
+          <Button title="Enviar" 
+            // Armazena os valores dos inputs em uma variável e gera um novo id para o produto
+            onPress={() => {
+              const novoProduto = {
+                nome: produtoNome,
+                preco: produtoPreco,
+                local: produtoLocal,
+                data: produtoData
+              }
+              const listaProdutos = [...produtos];
+              novoProduto.id = gerarNovoId();
+              listaProdutos.push(novoProduto);
+              setProdutos(listaProdutos);
+          }}
+          />
+      </View>
+    </View>
   );
 }
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    justifyContent: 'center',
-    // alignItems: 'center',
+    justifyContent: 'center',    
     backgroundColor: '#ecf0f1',
     padding: 8,
   },
-  imagem:{    
-    width: 50, 
-    height: 50,
-  },
   paragraph: {
-    width: '100%',
     margin: 24,
     fontSize: 18,
     fontWeight: 'bold',
