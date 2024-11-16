@@ -22,23 +22,24 @@ export default function ProdutoForm({onSubmit}) {
             />
             <TextInput 
                 placeholder="Local"
-                keyboardType='num-pad'
+                keyboardType='default'
                 onChangeText={setProdutoLocal}
             />
             <TextInput 
                 placeholder="Data"
-                keyboardType='phone-pad'
+                keyboardType='default'
                 onChangeText={setProdutoData}
             />
             <Button title="Enviar" 
                 // Armazena os valores dos inputs em uma variável e gera um novo id para o produto
                 onPress={()=>{
-                    onSubmit({
-                        nome: produtoNome, 
-                        preco: + produtoPreco, 
-                        local: produtoLocal, 
+                    const novoProduto = {                        
+                        nome: produtoNome,
+                        preco: +produtoPreco,
+                        local: produtoLocal,
                         data: produtoData
-                    })
+                    }
+                    onSubmit(novoProduto);
                 }}
             />
             <TouchableHighlight underlayColor="#ff0000"
