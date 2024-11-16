@@ -1,13 +1,10 @@
 import { useState } from 'react';
-import { Button, StyleSheet, Text, TextInput, View } from 'react-native';
-import ProdutoCard from './components/ProdutoCard';
+import { View, StyleSheet } from 'react-native';
+import ProdutoForm from './components/ProdutoForm';
+import ProdutoList from './components/ProdutoList';
 
 export default function App() {
   const [produtos, setProdutos] = useState([]);
-  const [produtoNome, setProdutoNome] = useState('');
-  const [produtoPreco, setProdutoPreco] = useState('');
-  const [produtoLocal, setProdutoLocal] = useState('');
-  const [produtoData, setProdutoData] = useState('');
 
   const gerarNovoId = _ => {
     const listaProdutos = [...produtos];
@@ -20,50 +17,18 @@ export default function App() {
     }
     return 1;
   }
+
+  const onSubmit = (novoProduto) => {        
+    const listaProdutos = [...produtos];
+    novoProduto.id = gerarNovoId();
+    listaProdutos.push(novoProduto);
+    setProdutos(listaProdutos);  
+  } 
+
   return (
     <View style={styles.container}>
-      <View>
-        <Text>Produtos:</Text>
-        {produtos.map(prod => <ProdutoCard prod={prod} />)}
-      </View>
-      <View>
-        <Text>Formulário de Cadastro:</Text>
-          <TextInput 
-            placeholder="Nome"
-            keyboardType='default'
-            onChangeText={setProdutoNome}
-          />
-          <TextInput 
-            placeholder="Preço"
-            keyboardType='decimal-pad'
-            onChangeText={setProdutoPreco}
-          />
-          <TextInput 
-            placeholder="Local"
-            keyboardType='num-pad'
-            onChangeText={setProdutoLocal}
-          />
-          <TextInput 
-            placeholder="Data"
-            keyboardType='phone-pad'
-            onChangeText={setProdutoData}
-          />
-          <Button title="Enviar" 
-            // Armazena os valores dos inputs em uma variável e gera um novo id para o produto
-            onPress={() => {
-              const novoProduto = {
-                nome: produtoNome,
-                preco: produtoPreco,
-                local: produtoLocal,
-                data: produtoData
-              }
-              const listaProdutos = [...produtos];
-              novoProduto.id = gerarNovoId();
-              listaProdutos.push(novoProduto);
-              setProdutos(listaProdutos);
-          }}
-          />
-      </View>
+      <ProdutoList produtos={produtos} />
+      <ProdutoForm onSubmit={onSubmit} />
     </View>
   );
 }
