@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { Button, Text, TextInput, View, StyleSheet } from 'react-native';
+import { Button, Text, TextInput, View, StyleSheet, TouchableHighlightBase, TouchableHighlight, TouchableOpacity, Pressable } from 'react-native';
 
 export default function ProdutoForm({onSubmit}) {    
     const [produtoNome, setProdutoNome] = useState('');
@@ -35,12 +35,29 @@ export default function ProdutoForm({onSubmit}) {
                 onPress={()=>{
                     onSubmit({
                         nome: produtoNome, 
-                        preco: produtoPreco, 
+                        preco: + produtoPreco, 
                         local: produtoLocal, 
                         data: produtoData
                     })
                 }}
             />
+            <TouchableHighlight underlayColor="#ff0000"
+                onPress={()=>{
+                    setProdutoNome(null);
+                }}>
+                <Text>Limpar</Text>
+            </TouchableHighlight>
+            <TouchableOpacity activeOpacity={0.5}
+                onPress={()=>{}}>
+                <View>
+                    <Text>Cancelar</Text>
+                </View>
+            </TouchableOpacity>
+            <Pressable onPressIn={() => {}}
+                onPressOut={() => {}}
+                onLongPress={() => {}}>
+                <Text>Voltar</Text>
+            </Pressable>
         </View>
     )
 }
