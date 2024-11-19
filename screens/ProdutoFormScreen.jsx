@@ -1,7 +1,9 @@
 import ProdutoForm from "../components/ProdutoForm";
 
-export default function ProdutoListScreen({onSubmit}) {
+// Tela que exibe o formulário para adicionar um novo produto
+// onSubmit: Uma função do app.jsx para adicionar um novo produto à lista de produtos
+export default function ProdutoFormScreen({ onSubmit }) {
     return (
-        <ProdutoForm onSubmit={onSubmit} /> 
+        <ProdutoForm onSubmit={onSubmit} />
     )
 }

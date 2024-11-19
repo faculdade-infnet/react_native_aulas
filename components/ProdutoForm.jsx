@@ -1,65 +1,69 @@
 import { useState } from 'react';
-import { Button, Text, TextInput, View, StyleSheet, TouchableHighlightBase, TouchableHighlight, TouchableOpacity, Pressable } from 'react-native';
+import { View, Text, TextInput, Button, StyleSheet } from 'react-native';
 
-export default function ProdutoForm({onSubmit}) {    
+// Exibir um formulário para cadastrar um novo produto
+export default function ProdutoForm({ onSubmit }) {
+    // Estado para armazenar os valores dos campos do formulário
     const [produtoNome, setProdutoNome] = useState('');
     const [produtoPreco, setProdutoPreco] = useState('');
     const [produtoLocal, setProdutoLocal] = useState('');
     const [produtoData, setProdutoData] = useState('');
 
     return (
-        <View>
-            <Text>Formulário de Cadastro:</Text>
-            <TextInput 
-                placeholder="Nome"
+        <View style={styles.container}>
+            <Text style={styles.header1}>Cadastro de Produto</Text>
+            <TextInput style={styles.textInput}
+                placeholder='Nome'
                 keyboardType='default'
                 onChangeText={setProdutoNome}
             />
-            <TextInput
-                placeholder="Preço"
+            <TextInput style={styles.textInput}
+                placeholder='Preço'
                 keyboardType='decimal-pad'
                 onChangeText={setProdutoPreco}
             />
-            <TextInput 
-                placeholder="Local"
+            <TextInput style={styles.textInput}
+                placeholder='Local'
                 keyboardType='default'
                 onChangeText={setProdutoLocal}
             />
-            <TextInput 
-                placeholder="Data"
+            <TextInput style={styles.textInput}
+                placeholder='Data'
                 keyboardType='default'
                 onChangeText={setProdutoData}
             />
-            <Button title="Enviar" 
-                // Armazena os valores dos inputs em uma variável e gera um novo id para o produto
-                onPress={()=>{
-                    const novoProduto = {                        
+            <Button
+                title='Salvar'
+                onPress={() => {
+                    const novoProduto = {
                         nome: produtoNome,
                         preco: +produtoPreco,
                         local: produtoLocal,
-                        data: produtoData
-                    }
+                        data: produtoData,
+                    };
                     onSubmit(novoProduto);
                 }}
             />
-            <TouchableHighlight underlayColor="#ff0000"
-                onPress={()=>{
-                    setProdutoNome(null);
-                }}>
-                <Text>Limpar</Text>
-            </TouchableHighlight>
-            <TouchableOpacity activeOpacity={0.5}
-                onPress={()=>{}}>
-                <View>
-                    <Text>Cancelar</Text>
-                </View>
-            </TouchableOpacity>
-            <Pressable onPressIn={() => {}}
-                onPressOut={() => {}}
-                onLongPress={() => {}}>
-                <Text>Voltar</Text>
-            </Pressable>
         </View>
-    )
+    );
 }
 
+const styles = StyleSheet.create({
+    container: {
+        padding: 5,
+    },
+    header1: {
+        fontSize: 26,
+        textAlign: 'center',
+        margin: 6,
+    },
+    textInput: {
+        fontSize: 20,
+        padding: 10,
+        margin: 4,
+        backgroundColor: "#ced4da",
+        borderBottomWidth: 1,
+        borderBottomColor: "#6c757d",
+        borderRadius: 5,
+    }
+})

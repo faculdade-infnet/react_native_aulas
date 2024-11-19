@@ -1,11 +1,18 @@
-import { View, Text } from "react-native";
-import ProdutoCard from "./ProdutoCard";
+import { View, Text, Pressable } from 'react-native';
+import ProdutoCard from './ProdutoCard';
 
-export default function ProdutoList({ produtos }) {
+// Exibe uma lista de produtos com o map
+// produtos: Um array de produtos
+// action: Uma função do app.jsx para selecionar um produto e navegar para a tela de detalhes
+export default function ProdutoList({ produtos, action }) {
     return (
         <View>
-            <Text>Produtos:</Text>
-            {produtos.map((prod, i) => <ProdutoCard key={i} prod={prod} />)}
+            <Text>Produtos</Text>
+            {produtos.map(prod => (
+                <Pressable key={prod.id} onPress={() => action(prod)}>
+                    <ProdutoCard prod={prod} />
+                </Pressable>
+            ))}
         </View>
-    )
+    );
 }
