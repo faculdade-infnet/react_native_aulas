@@ -1,20 +1,15 @@
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import ProdutosListScreen from './screens/ProdutosListScreen';
 import ProdutoFormScreen from './screens/ProdutoFormScreen';
 import ProdutoShowScreen from './screens/ProdutoShow/ProdutoShowScreen';
 import { NavigationContainer } from '@react-navigation/native';
-import HomeScreen from './screens/HomeScreen';
-import DashboardScreen from './screens/DashboardScreen';
 
 // Função construtora
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 // Objeto do tipo stack para navegação
 const Stack = createNativeStackNavigator();
 
-export default function App() {
-   // Determina qual tela deve ser exibida. produtos/formulário/detalhes
-   const [screen, setScreen] = useState(1);
-   const [produto, setProduto] = useState(null);
+export default function App() {      
    const [produtos, setProdutos] = useState([
      { id: 1, nome: "Arroz", preco: 20.50, local: "Mercado", data: "2024-10-24" },
      { id: 2, nome: "Sabonete", preco: 5.99, local: "Farmácia", data: "2024-10-24" },
@@ -43,16 +38,6 @@ export default function App() {
      listaProdutos.push(novoProduto);
      setProdutos(listaProdutos);
    }
- 
-   // Define o produto selecionado e muda para a tela de detalhes (screen = 3).
-   const action = (prod) => {
-     setProduto(prod);
-   }
- 
-   // Quando produto selecionado, muda para tela detalhes (screen = 3).
-   useEffect(() => {
-     if (produto) setScreen(3);
-   }, [produto]);
 
   return (
     <NavigationContainer>
@@ -82,5 +67,5 @@ export default function App() {
         />
       </Stack.Navigator>
     </NavigationContainer>
-  );
+  )
 }
