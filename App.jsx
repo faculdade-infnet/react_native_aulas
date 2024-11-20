@@ -6,8 +6,12 @@ import { NavigationContainer } from '@react-navigation/native';
 
 // Função construtora
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
+import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
+import { createDrawerNavigator } from '@react-navigation/drawer';
 // Objeto do tipo stack para navegação
 const Stack = createNativeStackNavigator();
+const Tab = createBottomTabNavigator();
+const Drawer = createDrawerNavigator();
 
 export default function App() {      
    const [produtos, setProdutos] = useState([
@@ -41,31 +45,31 @@ export default function App() {
 
   return (
     <NavigationContainer>
-      <Stack.Navigator>
-        <Stack.Screen 
+      <Tab.Navigator>
+        <Tab.Screen 
           name="ProdutoList"
           options={()=>({
             title: "Lista de Produtos"
           })}
         >
           {(props) => <ProdutosListScreen {...props} produtos={produtos}/>}
-        </Stack.Screen>
-        <Stack.Screen 
+        </Tab.Screen>
+        <Tab.Screen 
           name="ProdutoForm" 
           options={()=>({
             title: "Cadastro de Produto"
           })}
         >
           {() => <ProdutoFormScreen onSubmit={onSubmit} />}
-        </Stack.Screen>
-        <Stack.Screen 
+        </Tab.Screen>
+        <Tab.Screen 
           name='ProdutoShow' 
           options={() => ({
             title: "Produto" 
           })}
           component={ProdutoShowScreen}
         />
-      </Stack.Navigator>
+      </Tab.Navigator>
     </NavigationContainer>
   )
 }
