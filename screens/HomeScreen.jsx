@@ -7,7 +7,13 @@ export default function HomeScreen(props) {
         <Text>Home</Text>
         <Button 
           title="Ir para dashboard"
-          onPress={() => navigation.navigate('Dashboard')}
+          // (Nome da rota, parâmetros)
+          onPress={() => navigation.navigate(
+            'Dashboard', 
+            {            
+            email: "samuelhermany@hotmail.com",
+            }
+          )}
         />
     </View>
   )

@@ -8,7 +8,7 @@ export default function ProdutoList({ produtos, action }) {
     return (
         <View>
             <Text>Produtos</Text>
-            {produtos.map(prod => (
+            {produtos?.map(prod => (
                 <Pressable key={prod.id} onPress={() => action(prod)}>
                     <ProdutoCard prod={prod} />
                 </Pressable>

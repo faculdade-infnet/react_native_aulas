@@ -3,8 +3,9 @@ import Styles from './ProdutoShowStyle';
 
 // Tela que exibe os detalhes de um produto
 // produto: O produto que será exibido, com pprops(nome, preço, local, data, etc)
-export default function ProdutoShowScreen({ produto }) {
-    const { nome, preco, local, data } = produto;
+export default function ProdutoShowScreen({ route }) {
+    // route.params = é um objeto(produto) com os parâmetros passados na navegação
+    const { nome, preco, local, data } = route.params;
     return (
         <View style={Styles.container}>
             <Text style={Styles.header2}>{nome}</Text>
