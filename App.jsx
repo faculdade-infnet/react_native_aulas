@@ -19,7 +19,22 @@ export default function App() {
      { id: 2, nome: "Sabonete", preco: 5.99, local: "Farmácia", data: "2024-10-24" },
      { id: 3, nome: "Café", preco: 12.75, local: "Mercado", data: "2024-10-24" },
      { id: 4, nome: "Remédio para dor", preco: 24.00, local: "Farmácia", data: "2024-10-24" },
-     { id: 5, nome: "Leite", preco: 7.30, local: "Mercado", data: "2024-10-24" }
+     { id: 5, nome: "Leite", preco: 7.30, local: "Mercado", data: "2024-10-24" },
+     { id: 6, nome: "Arroz", preco: 20.50, local: "Mercado", data: "2024-10-24" },
+     { id: 7, nome: "Sabonete", preco: 5.99, local: "Farmácia", data: "2024-10-24" },
+     { id: 8, nome: "Café", preco: 12.75, local: "Mercado", data: "2024-10-24" },
+     { id: 9, nome: "Remédio para dor", preco: 24.00, local: "Farmácia", data: "2024-10-24" },
+     { id: 10, nome: "Leite", preco: 7.30, local: "Mercado", data: "2024-10-24" },
+     { id: 11, nome: "Arroz", preco: 20.50, local: "Mercado", data: "2024-10-24" },
+     { id: 12, nome: "Sabonete", preco: 5.99, local: "Farmácia", data: "2024-10-24" },
+     { id: 13, nome: "Café", preco: 12.75, local: "Mercado", data: "2024-10-24" },
+     { id: 14, nome: "Remédio para dor", preco: 24.00, local: "Farmácia", data: "2024-10-24" },
+     { id: 15, nome: "Leite", preco: 7.30, local: "Mercado", data: "2024-10-24" },
+     { id: 16, nome: "Arroz", preco: 20.50, local: "Mercado", data: "2024-10-24" },
+     { id: 17, nome: "Sabonete", preco: 5.99, local: "Farmácia", data: "2024-10-24" },
+     { id: 18, nome: "Café", preco: 12.75, local: "Mercado", data: "2024-10-24" },
+     { id: 19, nome: "Remédio para dor", preco: 24.00, local: "Farmácia", data: "2024-10-24" },
+     { id: 20, nome: "Leite", preco: 7.30, local: "Mercado", data: "2024-10-24" },
    ]);
  
    // Gerar um ID único para um novo produto
@@ -45,31 +60,31 @@ export default function App() {
 
   return (
     <NavigationContainer>
-      <Tab.Navigator>
-        <Tab.Screen 
+      <Drawer.Navigator>
+        <Drawer.Screen 
           name="ProdutoList"
           options={()=>({
             title: "Lista de Produtos"
           })}
         >
           {(props) => <ProdutosListScreen {...props} produtos={produtos}/>}
-        </Tab.Screen>
-        <Tab.Screen 
+        </Drawer.Screen>
+        <Drawer.Screen 
           name="ProdutoForm" 
           options={()=>({
             title: "Cadastro de Produto"
           })}
         >
           {() => <ProdutoFormScreen onSubmit={onSubmit} />}
-        </Tab.Screen>
-        <Tab.Screen 
+        </Drawer.Screen>
+        <Drawer.Screen 
           name='ProdutoShow' 
           options={() => ({
             title: "Produto" 
           })}
           component={ProdutoShowScreen}
         />
-      </Tab.Navigator>
+      </Drawer.Navigator>
     </NavigationContainer>
   )
 }
