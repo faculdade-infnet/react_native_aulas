@@ -14,7 +14,7 @@ export default function ProdutoList({ produtos, action }) {
         <FlatList
             data={produtos} // Array de produtos
             renderItem={RenderItem} // Função que renderiza cada item
-            keyExtractor={(item) => item.id.toString()} // Gera a chave única para cada item
+            keyExtractor={(item) => item.id} // Gera a chave única para cada item
         />
     );
 }

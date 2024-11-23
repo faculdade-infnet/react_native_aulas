@@ -14,10 +14,10 @@
     "ios": {
       "supportsTablet": true
     },
-    "android": {
+    "android": {      
       "adaptiveIcon": {
         "foregroundImage": "./assets/adaptive-icon.png",
-        "backgroundColor": "#ffffff"
+        "backgroundColor": "#ffffff"        
       }
     },
     "web": {
