@@ -14,33 +14,33 @@ const Drawer = createDrawerNavigator();
 // #endregion Imports
 
 export default function App() {      
-  return (
-    <NavigationContainer>
-      <Drawer.Navigator>
-        <Drawer.Screen 
-          name="ProdutoList"
-          options={()=>({
-            title: "Lista de Produtos"
-          })}
-        >
-          {(props) => <ProdutosListScreen {...props}/>}
-        </Drawer.Screen>
-        <Drawer.Screen 
-          name="ProdutoForm" 
-          options={()=>({
-            title: "Cadastro de Produto"
-          })}
-          component={ProdutoFormScreen}
-        >
-        </Drawer.Screen>
-        <Drawer.Screen 
-          name='ProdutoShow' 
-          options={() => ({
-            title: "Produto" 
-          })}
-          component={ProdutoShowScreen}
-        />
-      </Drawer.Navigator>
-    </NavigationContainer>
-  )
+   return (
+      <NavigationContainer>
+         <Drawer.Navigator>
+         <Drawer.Screen 
+            name="ProdutoList"
+            options={()=>({
+               title: "Lista de Produtos"
+            })}
+         >
+            {(props) => <ProdutosListScreen {...props}/>}
+         </Drawer.Screen>
+         <Drawer.Screen 
+            name="ProdutoForm" 
+            options={()=>({
+               title: "Cadastro de Produto"
+            })}
+            component={ProdutoFormScreen}
+         >
+         </Drawer.Screen>
+         <Drawer.Screen 
+            name='ProdutoShow' 
+            options={() => ({
+               title: "Produto" 
+            })}
+            component={ProdutoShowScreen}
+         />
+         </Drawer.Navigator>
+      </NavigationContainer>
+   )
 }
