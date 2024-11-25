@@ -64,7 +64,14 @@ export default function ProdutoForm({ onSubmit }) {
             onChangeText={setProdutoData}
          /> */}
          {/* Botão para exibir seleção de data */}
-         <Pressable onPress={() => setDateTimePickerShow(true)}>
+         <Pressable 
+            style={({ pressed }) => [
+               { backgroundColor: pressed ? '#003049' : '#90E0EF',
+                  color: pressed ? '#003049' : '#90E0EF'
+               },
+               styles.pressableContainer
+            ]}
+            onPress={() => setDateTimePickerShow(true)}>
             <View>
                <Text>Data</Text>
                <Text>{produtoData.toLocaleDateString('pt-BR')}</Text>
@@ -82,7 +89,11 @@ export default function ProdutoForm({ onSubmit }) {
             }}
          />}    
          {/* Option select para ativar/desativar a promoção */}
-         <View style={[styles.textInput, {flexDirection: 'row', justifyContent: 'space-evenly', alignItems: 'center'}]}>
+         <View style={[styles.textInput, {
+            flexDirection: 'row', 
+            justifyContent: 'space-evenly', 
+            alignItems: 'center'}]}
+         >
             <Text>Promoção: </Text>
             <Text>Não</Text>
             <Switch

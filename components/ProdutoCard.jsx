@@ -18,23 +18,7 @@ export default function ProdutoCard({ prod }) {
    );
 }
 
-const styles = StyleSheet.create({
-   container: {
-      paddingHorizontal: 5,
-      paddingVertical: 3,
-      marginVertical: 2,
-      // border: '1px solid black',
-      borderWidth: 1,
-      borderColor: '#8d99ae',
-      borderRadius: 5,
-      // marginTop: Platform.OS == 'android' ? 100 : 
-      //             Platform.OS == 'ios' ? 150 : 200,
-      ...Platform.select({
-         android: { marginTop: 10 },
-         ios: { marginTop: 15 },
-         web: { marginTop: 20 },
-      })
-   },
+const styles = StyleSheet.create({     
    cardHeader: {
       flexDirection: 'row',
       justifyContent: 'space-between',
