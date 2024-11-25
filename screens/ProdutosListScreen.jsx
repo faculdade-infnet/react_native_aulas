@@ -14,38 +14,44 @@ export default function ProdutosListScreen({ navigation }) {
    const [isLoading, setLoading] = useState(false);
    const [progress, setProgress] = useState(0);
 
-   /*{
-         "xpto": { id: 4, nome: "Remédio para dor", preco: 24.00, local: "Farmácia", data: "2024-10-24" },
-         "xyz": { id: 5, nome: "Leite", preco: 7.30, local: "Mercado", data: "2024-10-24" }
-   }*/
-
-   // Requisição GET com API, processa dados e atualizar o estado do componente
+   // Requisição GET com API, processa dados e atualizar o estado do componente   
    useEffect(() => {
       setLoading(true);
-      fetch(`${url}${resource}.json`)  // GET
-         .then(res => res.json())      // Processa dados recebidos
-         .then(prods => {
-            const produtosIds = Object.keys(prods);
-            const produtos = Object.values(prods);
-            const total = produtos.length;
-            let progress = 0;
-            let listaProdutos = [];
-            produtosIds.forEach((id, index) => {
-               listaProdutos.push({ id, ...produtos[index]});  // Monta um objeto combinando os atributos
-               progress = (index + 1) / total;                 // Calcula o progresso, item a item
-               setProgress(progress);                          // Atualiza o progresso  
-            });
-            setProdutos(listaProdutos);
-         })
-         .catch(error => setMessage(error.message))
-         .finally(setLoading(false));
+      fetch(`${url}${resource}.json`) // get
+          .then(res => res.json())
+          .then(prods => {
+              const produtosIds = Object.keys(prods);
+              const produtos = Object.values(prods);
+              const total = produtos.length;
+              let progress = 0;
+              let listaProdutos = [];
+              produtosIds.forEach((id, index) => {
+                  listaProdutos.push({ id, ...produtos[index]});  // Monta um objeto combinando os atributos
+                  progress = (index + 1) / total;                 // Calcula o progresso, item a item
+                  setProgress(progress);                          // Atualiza o progresso  
+              });
+              setProdutos(listaProdutos);
+          })
+          .catch(error => setMessage(error.message))
+          .finally(setLoading(false));
    }, []);
 
-   // Cria navegação para tela 'ProdutoShow' e passa o produto selecionado como parâmetro.
+   // Remover item da API
+   const actionRemove = (produto) => {
+      setLoading(true);
+      // remover da API
+      // ...
+      // remover da lista local
+      setProdutos(produtos.filter(prod => prod.id != produto.id));
+      setLoading(false);
+   }
+
+  // Cria navegação para tela 'ProdutoShow' e passa o produto selecionado como parâmetro.
    // Define o produto selecionado e muda para a tela de detalhes.
-   const action = (produto) => {
+   const actionShow = (produto) => {
       navigation.navigate('ProdutoShow', produto);
    }
+
 
    return (
       <View style={styles.container}>
@@ -60,7 +66,10 @@ export default function ProdutosListScreen({ navigation }) {
          {!isLoading ? (
             produtos.length > 0 ? (
                <View style={styles.listContainer}>
-               <ProdutoList produtos={produtos} action={action} />
+               <ProdutoList 
+                  produtos={produtos} 
+                  actionRemove={actionRemove}
+                  actionShow={actionShow}/>
                </View>
             ) : (
                <Text>Nenhum produto cadastrado.</Text>
