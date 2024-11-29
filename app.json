@@ -3,7 +3,7 @@
     "name": "vengeful-yellow-stroopwafels",
     "slug": "snack-1bf95991-fd27-4afd-9e3e-991577eb11ea",
     "version": "1.0.0",
-    "orientation": "portrait",
+    "orientation": "deafult",
     "icon": "./assets/icon.png",
     "userInterfaceStyle": "light",
     "splash": {

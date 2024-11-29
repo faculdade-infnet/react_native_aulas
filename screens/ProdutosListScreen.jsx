@@ -1,4 +1,4 @@
-import { View, Pressable, Text, StyleSheet, ActivityIndicator } from "react-native";
+import { View, Pressable, Text, StyleSheet, ActivityIndicator, useWindowDimensions } from "react-native";
 import ProdutoList from "../components/ProdutoList";
 import { useEffect, useState } from "react";
 import ProgressBar from "../components/ProgressBar";
@@ -8,6 +8,10 @@ import ProgressBar from "../components/ProgressBar";
 export default function ProdutosListScreen({ navigation }) {  
    const url = "https://react-native-infnet-default-rtdb.firebaseio.com/"
    const resource = "produtos"
+
+   // Verifica se a tela está no modo landscape
+   const {width, height} = useWindowDimensions();
+   const isLandscape = width > height;
 
    const [produtos, setProdutos] = useState([]);
    const [message, setMessage] = useState(null);
@@ -36,6 +40,10 @@ export default function ProdutosListScreen({ navigation }) {
           .finally(setLoading(false));
    }, []);
 
+   // useEffect(() => {
+   //      setLandscape(width > height);
+   //  }, [width, height]);
+
    // Remove do firebase com API
    const actionRemove = (produto) => {            
       // Exibe o indicador de carregamento
@@ -63,12 +71,16 @@ export default function ProdutosListScreen({ navigation }) {
 
    return (
       <View style={styles.container}>
+         <Text>{isLandscape ? 'Landscape' : 'Portrait'}</Text>
+         <Text>{width}</Text>
+         <Text>{height}</Text>
          {/* isLoading = true, exibe um indicador de carregamento (ActivityIndicator). */}
          {isLoading && <ActivityIndicator size="large" />}
          {/* isLoading = false e message != null, exibe mensagem. */}
          {!isLoading && message && <Text>{message}</Text>}
-         {/* BarraDeProgresso cujo valor exibido é controlado pela variável progress. valor entre 0 e 1*/}
-         <ProgressBar progress={progress} />
+         {/* BarraDeProgresso cujo valor exibido é controlado pela variável progress. valor entre 0 e 1
+             Se for landscape, não exibe a barra de progresso. */}
+         {!isLandscape && <ProgressBar progress={progress} />}
          {/* isLoading = false e produtos>0, exibe lista de produtos
          caso contrário, exibe mensagem "Nenhum produto cadastrado". */}
          {!isLoading ? (
