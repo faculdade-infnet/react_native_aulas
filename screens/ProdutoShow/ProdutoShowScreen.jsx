@@ -20,7 +20,14 @@ export default function ProdutoShowScreen({ route }) {
       angle.value = startAngle.value + event.rotation;     // Atualiza o angulo de rotação
    })
 
-   // Rotation Hook do reanimated
+   const animatedRotateStyle = useAnimatedStyle(() => ({      
+      transform: [
+         { rotate: `${angle.value}rad` }//,
+         //{ scale: scale.value }
+      ]      
+   }))
+
+   // Scale Hook do reanimated
    const scale = useSharedValue(1);          // Scala 
    const startScale = useSharedValue(0);     // Scala inicial
    const gesturePinch = Gesture.Pinch()
@@ -31,24 +38,43 @@ export default function ProdutoShowScreen({ route }) {
          startScale.value = scale.value         // Salva a ultimo valor da escala como valor inicial
       })
    
-   const animatedStyle = useAnimatedStyle(() => ({      
-         transform: [{ rotate: `${angle.value}rad` }]      
-   }))
+   const animatedScaleStyle = useAnimatedStyle(() => ({      
+      transform: [
+         { scale: scale.value }
+      ]      
+   }))   
 
-   // Evento de toque, existem vários outro eventos, no local de Tap   
-   /* const gestureTap = Gesture.Tap()
+   // Evento de toque
+   const gestureTap = Gesture.Tap()
         .onEnd(() => {
             Alert.alert("Gesto manipulado.");
-      }); */
-
-
-   const gestureCompose = Gesture.Race(gestureRotate, gesturePinch);
+      });
+      
+   /* Todos os gestos em conjunto*/
+   //  const animatedStyle = useAnimatedStyle(() => ({      
+   //       transform: [
+   //          { scale: scale.value },
+   //          { rotate: `${angle.value}rad` }    
+   //       ]      
+   // }))
+   
+   // Simultaneous = permite todos so gestos ao mesmo tempo
+   // Race = prioriza o primeiro da lista
+   const gestureCompose = gestureTap;
+   // const gestureCompose = Gesture.Race(gestureTap);
+   // const gestureCompose = Gesture.Simultaneous(gestureRotate, gesturePinch, gestureTap);
 
    return (
       <GestureHandlerRootView style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
-            <GestureDetector gesture={gesturePinch}>
-                <Animated.View style={[styles.animatedBox, animatedScaleStyle]} />
-            </GestureDetector>
+            {/* <GestureDetector gesture={gestureTap}>
+                <Animated.View style={[styles.animatedBoxTap]} />
+            </GestureDetector> */}
+            {/* <GestureDetector gesture={gestureCompose}>
+                <Animated.View style={[styles.animatedBoxRotate, animatedRotateStyle]} />
+            </GestureDetector> */}
+            {/* <GestureDetector gesture={gestureCompose}>
+                <Animated.View style={[styles.animatedBoxScale, animatedScaleStyle]} />
+            </GestureDetector> */}
         </GestureHandlerRootView>       
       // <View style={Styles.container}>
       //    <Text style={Styles.header2}>{nome}</Text>
@@ -60,8 +86,18 @@ export default function ProdutoShowScreen({ route }) {
 }
 
 const styles = StyleSheet.create({
-   animatedBox: {
-      backgroundColor: '#386641',
+   animatedBoxTap: {
+      backgroundColor: 'red',
+      width: 100,
+      height: 100,
+   },
+   animatedBoxRotate: {
+      backgroundColor: 'blue',
+      width: 100,
+      height: 100,
+   },
+   animatedBoxScale: {
+      backgroundColor: 'green',
       width: 100,
       height: 100,
    }

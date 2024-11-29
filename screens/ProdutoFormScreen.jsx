@@ -22,21 +22,21 @@ export default function ProdutoFormScreen() {
    
    // Enviar um novo produto pelo formulário via POST no firebase
    // setLoading = true, exibe o circulo de carregamento, ao finalizar o envio, setLoading = false
-   const onSubmit = (novoProduto) => {
-   setLoading(true);
-   fetch(`${url}${resource}.json`, {
-         method: "POST", // GET
-         body: JSON.stringify(novoProduto)
-   })
-   .then(async resp => {
-         const id = await resp.json();        
-         const listaProdutos = [...produtos];
-         novoProduto.id = id.name;
-         listaProdutos.push(novoProduto);
-         setProdutos(listaProdutos);
-   })
-   .catch(error => { Alert.alert(error.message); })
-   .finally(_ => setLoading(false));
+   const onSubmit = (novoItem) => {
+      setLoading(true);
+      fetch(`${url}${resource}.json`, {
+            method: "POST", // GET
+            body: JSON.stringify(novoItem)
+      })
+      .then(async resp => {
+            const id = await resp.json();        
+            const listaProdutos = [...produtos];
+            novoItem.id = id.name;
+            listaProdutos.push(novoItem);
+            setProdutos(listaProdutos);
+      })
+      .catch(error => { Alert.alert(error.message); })
+      .finally(_ => setLoading(false));
    }
 
    return (

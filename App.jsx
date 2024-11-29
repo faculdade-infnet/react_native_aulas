@@ -28,7 +28,7 @@ export default function App() {
          <Drawer.Screen 
             name="ProdutoForm" 
             options={()=>({
-               title: "Cadastro de Produto"
+               title: "Novo Produto"
             })}
             component={ProdutoFormScreen}
          >

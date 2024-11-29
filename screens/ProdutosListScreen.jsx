@@ -36,14 +36,22 @@ export default function ProdutosListScreen({ navigation }) {
           .finally(setLoading(false));
    }, []);
 
-   // Remover item da API
-   const actionRemove = (produto) => {
-      setLoading(true);
-      // remover da API
-      // ...
-      // remover da lista local
-      setProdutos(produtos.filter(prod => prod.id != produto.id));
-      setLoading(false);
+   // Remove do firebase com API
+   const actionRemove = (produto) => {            
+      // Exibe o indicador de carregamento
+      setLoading(true); 
+      fetch(`${url}${resource}/${produto.id}.json`, {
+         method: "DELETE", 
+      })
+      .then(() => {
+         // Remove o item da lista local
+         const listaAtualizada = produtos.filter((item) => item.id !== produto.id);
+         setProdutos(listaAtualizada); // Atualiza o estado
+      })
+      .catch((error) => {
+         Alert.alert("Erro ao remover produto", error.message);
+      })
+      .finally(() => setLoading(false)); // Finaliza o carregamento            
    }
 
   // Cria navegação para tela 'ProdutoShow' e passa o produto selecionado como parâmetro.
