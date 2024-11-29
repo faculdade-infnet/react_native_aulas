@@ -52,8 +52,10 @@ export default function ProdutoForm({ onSubmit }) {
                onValueChange={setProdutoLocal}
             >
                <Picker.Item label='Selecione uma Opção' value='' />
-               {listaLocais
-                  .map(local => <Picker.Item label={local.label} value={local.value} />)
+               {
+                  listaLocais.map(local => 
+                     <Picker.Item label={local.label} value={local.value} />
+                  )
                }
             </Picker>
          </View>

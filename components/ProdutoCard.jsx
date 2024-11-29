@@ -1,4 +1,4 @@
-import { View, Text, StyleSheet, Platform } from 'react-native';
+import { View, Text, StyleSheet, Platform, Alert } from 'react-native';
 import { GestureHandlerRootView, Pressable } from 'react-native-gesture-handler';
 import ReanimatedSwipeable from 'react-native-gesture-handler/ReanimatedSwipeable'
 import Reanimated, { useAnimatedStyle } from 'react-native-reanimated';
@@ -7,6 +7,8 @@ export default function ProdutoCard({ prod, actionRemove, actionShow }) {
     return (
         <GestureHandlerRootView>
             <ReanimatedSwipeable
+               // Obtém o inicio do movimento do swipe(arrastar)
+               //onSwipeableOpenStartDrag={()=>Alert.alert('Agir')}               
                // da esquerda para a direita
                 renderLeftActions={(_, drag) => {
                     const styleAnimation = useAnimatedStyle(() => {
